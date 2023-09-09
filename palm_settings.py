@@ -34,14 +34,14 @@ class PVData:
 
  # PVOutput.org data logging/analysis service
 class PVOutput:
-    enable = True
+    enable = False
     url= "https://pvoutput.org/service/r2/"
     key = "xxxx"
     sid = "xxxx"
 
 # API for obtaining current UK carbon intensity of electricity generation
 class CarbonIntensity:
-    enable = True
+    enable = False
     url = "https://api.carbonintensity.org.uk/regional/intensity/"
     RegionID = "/fw24h/regionid/15"
     Threshold = 250  # For Used to trigger afternoon battery charge
@@ -49,7 +49,7 @@ class CarbonIntensity:
 
 # Weather data
 class OpenWeatherMap:
-    enable = True
+    enable = False
     url = "https://api.openweathermap.org/data/2.5/"
     url_weather = "https://api.openweathermap.org/data/2.5/weather?"
     url_forecast = "https://api.openweathermap.org/data/2.5/forecast?"
@@ -87,7 +87,7 @@ class GE:
     batt_reserve = 4
 
     # Nominal battery capacity
-    batt_capacity = 10.4
+    batt_capacity = 9.5
 
     # Proportion of battery that's usable
     batt_utilisation = 0.85
@@ -107,31 +107,31 @@ class GE:
     # Most recent day only
     # load_hist_weight = [1]
     # 3-day average
-    load_hist_weight = [1, 1, 1]
+    # load_hist_weight = [1, 1, 1]
     # 7-day average
     # load_hist_weight = [1, 1, 1, 1, 1, 1, 1]
     # Same day last week - useful if, say, Monday is always wash-day
-    # load_hist_weight = [0, 0, 0, 0, 0, 0, 1]
+    load_hist_weight = [0, 0, 0, 0, 0, 0, 1]
     # Weighted average (a more extreme example)
     # load_hist_weight = [4, 2, 2, 1, 1, 1, 1]
 
     # Start time for Overnight Charge. If "", disables writing this inverter register
     # Be kind to the grid and set your own value that isn't "on the hour/half-hour" to stagger demand
-    start_time = "00:37"
+    start_time = "02:00"
 
     # End time for Overnight Charge period. If "", disables writing this inverter register
-    end_time = "04:30"
+    end_time = "05:00"
 
     # Delayed winter end time saves battery for morning peak. If "", disables writing this inverter register
-    end_time_winter = "06:30"    
+    end_time_winter = ""    
 
-    # Winter afternoon boost start and end times
-    boost_start = "13:03"
-    boost_finish = "16:44"
+    # Winter / shoulder afternoon boost start and end times; flux peak export period pausing time
+    boost_start = "16:00"
+    boost_finish = "19:00"
 
 # MiHome devices are used to activate various loads
 class MiHome:
-    enable = True
+    enable = False
     url = "https://mihome4u.co.uk/api/v1/subdevices/"
     UserID = "XXXX"
     key = "XXXX"
