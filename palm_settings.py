@@ -72,8 +72,11 @@ class GE:
     winter = ["01", "02", "11", "12"]
 
     # Throttle SoC calculation in shoulder months as consumption can vary with heating coming on
-    shoulder = ["03", "04", "09", "10"]
+    shoulder = ["03", "04", "10"]
 
+   # Months included here will pause battery charging during flux peak export hours to ensure maximum export (solar will export rather than charge battery; note, this is applied after the shoulder months, and will override it; remove months if not using flux) 
+    flux = ["06", "07", "08", "09"]
+    
     # Lower limit for state of charge (summertime)
     min_soc_target = 20
 
