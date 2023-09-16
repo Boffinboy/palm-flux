@@ -556,13 +556,10 @@ if __name__ == '__main__':
                 try:
                     inverter.get_load_hist()
                     logger.info("Forecast weighting: "+ str(stgs.Solcast.weight))
-                        inv_cmd = inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight,
-True)
-    if inv_cmd == “set_soc”:
-        inverter.tgt_soc = str(max(int(inverter.soc),
-int(inverter.tgt_soc)))
-
-    inverter.set_mode(inv_cmd)
+                    inv_cmd = inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight,True)
+                    if inv_cmd == "set_soc":
+                       inverter.tgt_soc = str(max(int(inverter.soc), int(inverter.tgt_soc)))
+                    inverter.set_mode(inv_cmd)
                 except Exception:
                     logger.error("Warning; unable to set SoC")
 
