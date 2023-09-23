@@ -50,10 +50,11 @@ import palm_settings as stgs
 # v0.10.0   21/Jun/23 Added multi-day averaging for usage calcs
 # v1.0.0    15/Jul/23 Random start time, Solcast data correction, IO compatibility, 48-hour fcast
 # v1.1.0    06/Aug/23 Split out generic functions as palm_utils.py
+# v1.1.0BB  17/Sep/23 Added Flux pause charging during afternoons; don't discharge if already above target
 
 # NOTE: To enable plot capability, uncomment all lines begiinging with "##"
 
-PALM_VERSION = "v1.1.0"
+PALM_VERSION = "v1.1.0BB"
 # -*- coding: utf-8 -*-
 # pylint: disable=logging-not-lazy
 # pylint: disable=consider-using-f-string
@@ -555,7 +556,10 @@ if __name__ == '__main__':
                 try:
                     inverter.get_load_hist()
                     logger.info("Forecast weighting: "+ str(stgs.Solcast.weight))
-                    inverter.set_mode(inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight, True))
+                    inv_cmd = inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight,True)
+                    if inv_cmd == "set_soc":
+                       inverter.tgt_soc = str(max(int(inverter.soc), int(inverter.tgt_soc)))
+                    inverter.set_mode(inv_cmd)
                 except Exception:
                     logger.error("Warning; unable to set SoC")
 
