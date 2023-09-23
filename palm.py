@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# EDITS VS ORIGINAL: FLUX SETTINGS IN LINES AROUND 600
 """PALM - PV Active Load Manager."""
 
 import sys
@@ -607,7 +608,7 @@ if __name__ == '__main__':
                     logger.info("Enabling afternoon battery boost (shoulder)")
                     inverter.tgt_soc = str(stgs.GE.max_soc_target)
                     inverter.set_mode("charge_now_soc")
-                if stgs.pg.t_now_mins == t_to_mins(stgs.GE.boost_finish) and stgs.pg.month not in stgs.GE.winter:
+                if stgs.pg.t_now_mins == t_to_mins(stgs.GE.boost_finish) and stgs.pg.month in stgs.GE.flux:
                     inverter.set_mode("resume")  # Set inverter to resume charging battery from solar
                 elif stgs.pg.t_now_mins == t_to_mins(stgs.GE.boost_finish):
                     inverter.set_mode("set_soc_winter")  # Set inverter for next timed charge period
