@@ -111,7 +111,7 @@ class GivEnergyObj:
             }
 
             try:
-                resp = requests.request('GET', url, headers=headers)
+                resp = requests.request('GET', url, headers=headers, timeout=10)
             except requests.exceptions.RequestException as error:
                 logger.error(error)
                 return
@@ -473,16 +473,18 @@ class GivEnergyObj:
         else:
             low_soc = stgs.GE.min_soc_target
 
-        # So we now have the four values of max & min charge for tomorrow & overmorrow
+        max_charge_pc = max_charge_pcnt[0]
+        min_charge_pc = min_charge_pcnt[0]
+
+        # We now have the four values of max & min charge for tomorrow & overmorrow
         # Check if overmorrow is better than tomorrow and there is opportunity to reduce target
-        # to avoid residual charge at the end of the day in anticipation of a sunny day
-        if max_charge_pcnt[1] > 100 - low_soc > max_charge_pcnt[0]:
+        # to avoid residual charge at the end of the day in anticipation of a sunny day.
+        # Reduce the target by implying that there will be more than forecast generation
+        if max_charge_pcnt[1] > 100 and  max_charge_pcnt[0] < 100:
             logger.info("Overmorrow correction enabled")
-            max_charge_pc = max_charge_pcnt[0] + (max_charge_pcnt[1] - 100) / 2
+            max_charge_pc += int((max_charge_pcnt[1] - 100) / 2)
         else:
             logger.info("Overmorrow correction not needed/enabled")
-            max_charge_pc = max_charge_pcnt[0]
-        min_charge_pc = min_charge_pcnt[0]
 
         # The really clever bit: reduce the target SoC to the greater of:
         #     The surplus above 100% for max_charge_pcnt
