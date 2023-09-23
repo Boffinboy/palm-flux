@@ -72,16 +72,16 @@ class GE:
     winter = ["01", "02", "11", "12"]
 
     # Throttle SoC calculation in shoulder months as consumption can vary with heating coming on
-    shoulder = ["03", "04", "10"]
+    shoulder = ["03", "04", "09", "10"]
 
    # Months included here will pause battery charging during flux peak export hours to ensure maximum export (solar will export rather than charge battery; note, this is applied after the shoulder months, and will override it; remove months if not using flux) 
-    flux = ["06", "07", "08", "09"]
+    flux = ["05", "06", "07", "08"]
     
     # Lower limit for state of charge (summertime)
     min_soc_target = 20
 
     # Higher SoC limit for shoulder months
-    max_soc_target = 60
+    max_soc_target = 75
 
     # Battery reserve for power cuts (minmum of 4%)
     batt_reserve = 4
@@ -117,17 +117,17 @@ class GE:
 
     # Start time for Overnight Charge. If "", disables writing this inverter register
     # Be kind to the grid and set your own value that isn't "on the hour/half-hour" to stagger demand
-    start_time = "02:00"
+    start_time = "04:00"
 
     # End time for Overnight Charge period. If "", disables writing this inverter register
-    end_time = "05:00"
+    end_time = "07:00"
 
     # Delayed winter end time saves battery for morning peak. If "", disables writing this inverter register
     end_time_winter = ""    
 
     # Winter / shoulder afternoon boost start and end times; flux peak export period pausing time
-    boost_start = "16:00"
-    boost_finish = "19:00"
+    boost_start = "13:00"
+    boost_finish = "16:00"
 
 # MiHome devices are used to activate various loads
 class MiHome:
