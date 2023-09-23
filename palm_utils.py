@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# EDITS VS ORIGINAL: PAUSE DISCHARGE DURING CHARGE NOW SOC - LINE 336 to 352
 """PALM - PV Active Load Manager."""
 
 import time
@@ -325,6 +326,7 @@ class GivEnergyObj:
 
         if cmd == "set_soc":  # Sets target SoC to value
             set_inverter_register("77", str(self.tgt_soc))
+            set_inverter_register("73", "3000")
             if stgs.GE.start_time != "":
                 start_time = t_to_hrs(t_to_mins(stgs.GE.start_time))
                 set_inverter_register("64", start_time)
@@ -333,6 +335,7 @@ class GivEnergyObj:
 
         elif cmd == "set_soc_winter":  # Restore default overnight charge params
             set_inverter_register("77", "100")
+            set_inverter_register("73", "3000")
             if stgs.GE.start_time != "":
                 start_time = t_to_hrs(t_to_mins(stgs.GE.start_time))
                 set_inverter_register("64", stgs.GE.start_time)
@@ -343,11 +346,13 @@ class GivEnergyObj:
             set_inverter_register("77", "100")
             set_inverter_register("64", "00:01")
             set_inverter_register("65", "23:59")
+            set_inverter_register("73", "0")
 
         elif cmd == "charge_now_soc":
             set_inverter_register("77", str(self.tgt_soc))
             set_inverter_register("64", "00:01")
             set_inverter_register("65", "23:59")
+            set_inverter_register("73", "0")
 
         elif cmd == "pause":
             set_inverter_register("72", "0")
