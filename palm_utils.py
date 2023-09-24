@@ -339,7 +339,6 @@ class GivEnergyObj:
                 start_time = t_to_hrs(t_to_mins(stgs.GE.start_time))
                 set_inverter_register("64", stgs.GE.start_time)
             if stgs.GE.end_time != "": # Boffinboy restor at end of boost
-                start_time = t_to_hrs(t_to_mins(stgs.GE.end_time))
                 set_inverter_register("65", stgs.GE.end_time)    
             if stgs.GE.end_time_winter != "":
                 set_inverter_register("65", stgs.GE.end_time_winter)
