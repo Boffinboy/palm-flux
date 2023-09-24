@@ -561,7 +561,9 @@ if __name__ == '__main__':
                     if inv_cmd == “set_soc”:
                         inverter.tgt_soc = str(max(int(inverter.soc), int(inverter.tgt_soc)))
                        inverter.set_mode(inv_cmd) 
-                except Exception:
+                except Exception as error:
+                    logger.error(str(type(error).__name__))
+                    logger.error(str(error))
                     logger.error("Warning; unable to set SoC")
 
                 # Send plot data to logfile in CSV format
