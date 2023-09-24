@@ -558,7 +558,7 @@ if __name__ == '__main__':
                     logger.info("Forecast weighting: "+ str(stgs.Solcast.weight))
                     # inverter.set_mode(inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight, True))
                     inv_cmd = inverter.compute_tgt_soc(pv_forecast, stgs.Solcast.weight, True)
-                    if inv_cmd == “set_soc”:
+                    if inv_cmd == "set_soc":
                         inverter.tgt_soc = str(max(int(inverter.soc), int(inverter.tgt_soc)))
                        inverter.set_mode(inv_cmd) 
                 except Exception as error:
