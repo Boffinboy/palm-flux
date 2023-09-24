@@ -343,14 +343,14 @@ class GivEnergyObj:
 
         elif cmd == "charge_now":
             set_inverter_register("77", "100")
-            set_inverter_register("64", "00:01")
-            set_inverter_register("65", "23:59")
+            set_inverter_register("64", stgs.GE.boost_start)
+            set_inverter_register("65", stgs.GE.boost_finish)
             set_inverter_register("73", "0") # Boffinboy pause discharge during this period
 
         elif cmd == "charge_now_soc":
             set_inverter_register("77", str(self.tgt_soc))
-            set_inverter_register("64", "00:01")
-            set_inverter_register("65", "23:59")
+            set_inverter_register("64", stgs.GE.boost_start)
+            set_inverter_register("65", stgs.GE.boost_finish)
             set_inverter_register("73", "0") # Boffinboy pause discharge during this period
 
         elif cmd == "pause":
