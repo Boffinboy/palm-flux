@@ -78,7 +78,7 @@ class GE:
     min_soc_target = 25
 
     # Higher SoC limit for shoulder months
-    max_soc_target = 75
+    max_soc_target = 50
 
     # Battery reserve for power cuts (minmum of 4%)
     batt_reserve = 4
