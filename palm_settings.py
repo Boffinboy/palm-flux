@@ -87,7 +87,7 @@ class GE:
     batt_capacity = 9.5
 
     # Proportion of battery that's usable
-    batt_utilisation = 0.85
+    batt_utilisation = 0.96
 
     batt_max_charge = batt_capacity * batt_utilisation
 
