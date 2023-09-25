@@ -75,10 +75,10 @@ class GE:
     shoulder = ["03", "04", "09", "10"]
 
     # Lower limit for state of charge (summertime)
-    min_soc_target = 25
+    min_soc_target = 35
 
     # Higher SoC limit for shoulder months
-    max_soc_target = 50
+    max_soc_target = 60
 
     # Battery reserve for power cuts (minmum of 4%)
     batt_reserve = 4
