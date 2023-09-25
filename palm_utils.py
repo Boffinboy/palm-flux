@@ -398,6 +398,7 @@ class GivEnergyObj:
         wgt_10 = max(0, 50 - weight)
         if weight > 50:
             wgt_50 = 90 - weight
+            
         else:
             wgt_50 = weight - 10
         wgt_90 = max(0, weight - 50)
@@ -406,6 +407,7 @@ class GivEnergyObj:
         logger.info("{:<20} {:>10} {:>10} {:>10} {:>10}  {:>10} {:>10}".format("SoC Calc;",
             "Day", "Hour", "Charge", "Cons", "Gen", "SoC"))
 
+        tgt_soc: int = 100
         # Definitions for export of SoC forecast in chart form
         plot_x = ["Time"]
         plot_y1 = ["Calculated SoC"]
